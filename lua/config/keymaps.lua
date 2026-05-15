@@ -13,3 +13,15 @@ map("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "Telescope: find fi
 map("n", "<leader>fg", ":Telescope live_grep<CR>", { desc = "Telescope: live grep", silent = true })
 map("n", "<leader>fb", ":Telescope buffers<CR>", { desc = "Telescope: buffers", silent = true })
 map("n", "<leader>fh", ":Telescope help_tags<CR>", { desc = "Telescope: help tags", silent = true })
+
+-- Gitsigns
+local function gs()
+  return require("gitsigns")
+end
+
+map("n", "]c", function() gs().nav_hunk("next") end, { desc = "Gitsigns: next hunk", silent = true })
+map("n", "[c", function() gs().nav_hunk("prev") end, { desc = "Gitsigns: previous hunk", silent = true })
+map("n", "<leader>hs", function() gs().stage_hunk() end, { desc = "Gitsigns: stage hunk", silent = true })
+map("n", "<leader>hr", function() gs().reset_hunk() end, { desc = "Gitsigns: reset hunk", silent = true })
+map("n", "<leader>hp", function() gs().preview_hunk() end, { desc = "Gitsigns: preview hunk", silent = true })
+map("n", "<leader>hb", function() gs().blame_line() end, { desc = "Gitsigns: blame line", silent = true })
