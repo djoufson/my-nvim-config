@@ -25,3 +25,9 @@ map("n", "<leader>hs", function() gs().stage_hunk() end, { desc = "Gitsigns: sta
 map("n", "<leader>hr", function() gs().reset_hunk() end, { desc = "Gitsigns: reset hunk", silent = true })
 map("n", "<leader>hp", function() gs().preview_hunk() end, { desc = "Gitsigns: preview hunk", silent = true })
 map("n", "<leader>hb", function() gs().blame_line() end, { desc = "Gitsigns: blame line", silent = true })
+
+-- LSP: <C-l> as a consistent "show info" key. In insert mode blink.cmp owns
+-- <C-l> (show menu/docs); here in normal mode it shows hover documentation
+-- for the symbol under the cursor — same intent, same key. (Overrides the
+-- default <C-l> screen redraw; use :redraw if you ever need that.)
+map("n", "<C-l>", vim.lsp.buf.hover, { desc = "LSP: hover documentation", silent = true })
