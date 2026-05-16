@@ -36,10 +36,15 @@ To add a plugin, create a new file in `lua/plugins/` that returns a lazy.nvim sp
 - **neo-tree.nvim** — file explorer
 - **telescope.nvim** — fuzzy finder
 - **nvim-lspconfig** + **mason.nvim** + **mason-lspconfig.nvim** — LSP tooling
+- **nvim-treesitter** (`main` branch) — syntax highlighting
+- **gitsigns.nvim** + **vim-fugitive** — git integration
+- **blink.cmp** — autocompletion
 
 ## Keymaps
 
 Leader is `<Space>`.
+
+### Files & windows
 
 | Mapping       | Action                        |
 | ------------- | ----------------------------- |
@@ -47,10 +52,39 @@ Leader is `<Space>`.
 | `<leader>o`   | Focus Neo-tree explorer       |
 | `<leader>r`   | Reveal current file in tree   |
 | `<leader>w`   | Focus previous window         |
-| `<leader>ff`  | Telescope: find files         |
-| `<leader>fg`  | Telescope: live grep          |
-| `<leader>fb`  | Telescope: buffers            |
-| `<leader>fh`  | Telescope: help tags          |
+
+### Telescope
+
+| Mapping       | Action                        |
+| ------------- | ----------------------------- |
+| `<leader>ff`  | Find files                    |
+| `<leader>fg`  | Live grep                     |
+| `<leader>fb`  | Buffers                       |
+| `<leader>fh`  | Help tags                     |
+
+### Git (gitsigns)
+
+| Mapping       | Action                        |
+| ------------- | ----------------------------- |
+| `]c` / `[c`   | Next / previous hunk          |
+| `<leader>hs`  | Stage hunk                    |
+| `<leader>hr`  | Reset hunk                    |
+| `<leader>hp`  | Preview hunk                  |
+| `<leader>hb`  | Blame line                    |
+
+Inline blame for the current line shows automatically (no keymap).
+
+### Completion (blink.cmp)
+
+`default` preset — does not remap `<Tab>` or `<CR>`.
+
+| Mapping            | Action                        |
+| ------------------ | ----------------------------- |
+| `<C-Space>`        | Open/toggle completion menu   |
+| `<C-y>`            | Accept selected item          |
+| `<C-n>` / `<C-p>`  | Next / previous item          |
+| `<C-e>`            | Dismiss menu                  |
+| `<Tab>` / `<S-Tab>`| Jump between snippet fields   |
 
 ## Behavior
 

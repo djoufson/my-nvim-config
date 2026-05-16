@@ -1,6 +1,14 @@
 -- LSP server configuration.
 -- All `cmd` binaries are provided by Mason (its bin dir is prepended to PATH).
 
+-- Advertise blink.cmp's completion capabilities to every server. blink
+-- auto-patches nvim-lspconfig, but our servers use the native vim.lsp API,
+-- so we apply it explicitly via the `*` wildcard config. (require() here
+-- triggers lazy.nvim to load blink, which is fine — it's fast.)
+vim.lsp.config("*", {
+  capabilities = require("blink.cmp").get_lsp_capabilities(),
+})
+
 vim.lsp.config("csharp_ls", {
   cmd = { "csharp-ls" },
   filetypes = { "cs" },
