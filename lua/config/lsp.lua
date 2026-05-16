@@ -1,6 +1,17 @@
 -- LSP server configuration.
 -- All `cmd` binaries are provided by Mason (its bin dir is prepended to PATH).
 
+-- Inline diagnostics, VS Code "Error Lens" style: the message is rendered as
+-- virtual text at the end of the offending line. Built into Neovim, no plugin.
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = "●",
+    spacing = 4,
+  },
+  severity_sort = true, -- worst severity wins when a line has several
+  underline = true, -- squiggle under the offending span
+})
+
 -- Advertise blink.cmp's completion capabilities to every server. blink
 -- auto-patches nvim-lspconfig, but our servers use the native vim.lsp API,
 -- so we apply it explicitly via the `*` wildcard config. (require() here
