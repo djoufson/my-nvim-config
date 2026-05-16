@@ -76,15 +76,31 @@ Inline blame for the current line shows automatically (no keymap).
 
 ### Completion (blink.cmp)
 
-`default` preset — does not remap `<Tab>` or `<CR>`.
+`default` preset — does not remap `<Tab>` or `<CR>`. Insert mode.
 
 | Mapping            | Action                        |
 | ------------------ | ----------------------------- |
-| `<C-Space>`        | Open/toggle completion menu   |
+| `<C-l>`            | Open/toggle completion menu   |
 | `<C-y>`            | Accept selected item          |
 | `<C-n>` / `<C-p>`  | Next / previous item          |
 | `<C-e>`            | Dismiss menu                  |
 | `<Tab>` / `<S-Tab>`| Jump between snippet fields   |
+
+Entry documentation auto-shows while navigating the menu (no keymap).
+`<C-Space>` is intentionally unmapped (conflicts with macOS / not
+deliverable by Apple Terminal).
+
+### LSP (documentation & actions)
+
+Normal mode. Requires an LSP attached to the buffer (`:LspInfo`).
+
+| Mapping       | Action                                          |
+| ------------- | ----------------------------------------------- |
+| `K`           | Hover docs for symbol under cursor (Vim default)|
+| `<C-l>`       | Hover docs — same key as completion, by design  |
+| `<leader>c`   | Code actions / quick fixes (also `gra`, a Neovim default) |
+
+Press `K` / `<C-l>` again to focus the hover window and scroll it; `q` closes it.
 
 ## Behavior
 

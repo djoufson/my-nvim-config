@@ -31,3 +31,7 @@ map("n", "<leader>hb", function() gs().blame_line() end, { desc = "Gitsigns: bla
 -- for the symbol under the cursor — same intent, same key. (Overrides the
 -- default <C-l> screen redraw; use :redraw if you ever need that.)
 map("n", "<C-l>", vim.lsp.buf.hover, { desc = "LSP: hover documentation", silent = true })
+
+-- LSP code actions (the built-in quick-fix/refactor menu; ships its own UI).
+-- Neovim 0.11 also binds this to `gra` by default.
+map("n", "<leader>c", vim.lsp.buf.code_action, { desc = "LSP: code actions", silent = true })
