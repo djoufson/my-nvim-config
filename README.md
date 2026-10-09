@@ -54,6 +54,35 @@ Leader is `<Space>`.
 | `<leader>r`   | Reveal current file in tree   |
 | `<leader>w`   | Focus previous window         |
 
+### Creating files
+
+**From Neo-tree** (recommended): open the explorer (`<leader>e`), put the
+cursor on the target folder, press `a`, type a name and hit `<CR>`. The file is
+created on disk immediately and opens in a new tab.
+
+- Nested paths work (`services/auth/token.cs`) — missing folders are created.
+- End the name with `/` to create a folder instead.
+
+Other Neo-tree defaults:
+
+| Key | Action             |
+| --- | ------------------ |
+| `a` | Add file / folder  |
+| `A` | Add folder         |
+| `r` | Rename             |
+| `d` | Delete             |
+| `c` | Copy               |
+| `m` | Move               |
+| `?` | Show all mappings  |
+
+**From the command line**: `:e path/to/newfile.lua` opens a new, empty buffer.
+
+- It isn't on disk until it's written. Autosave only writes *modified*
+  buffers, so an empty new file stays unsaved until you type something — or
+  run `:w`.
+- `:e` doesn't create missing parent folders; use `:w ++p` to create them on
+  write.
+
 ### Tabs (bufferline)
 
 Every file you open becomes a tab in the bar at the top, VS Code-style. These
@@ -98,17 +127,21 @@ Inline blame for the current line shows automatically (no keymap).
 
 ### Completion (blink.cmp)
 
-`default` preset — does not remap `<Tab>` or `<CR>`. Insert mode.
+`enter` preset, VS Code-style. Insert mode.
 
-| Mapping            | Action                        |
-| ------------------ | ----------------------------- |
-| `<C-l>`            | Open/toggle completion menu   |
-| `<C-y>`            | Accept selected item          |
-| `<C-n>` / `<C-p>`  | Next / previous item          |
-| `<C-e>`            | Dismiss menu                  |
-| `<Tab>` / `<S-Tab>`| Jump between snippet fields   |
+| Mapping                         | Action                                   |
+| ------------------------------- | ---------------------------------------- |
+| `<CR>`                          | Accept selected item (newline if no menu)|
+| `<Esc>`                         | Dismiss menu, stay in insert mode        |
+| `<C-l>`                         | Open/toggle completion menu              |
+| `<C-n>` / `<C-p>`, `<Down>` / `<Up>` | Next / previous item                |
+| `<C-e>`                         | Dismiss menu                             |
+| `<Tab>` / `<S-Tab>`             | Jump between snippet fields              |
 
-Entry documentation auto-shows while navigating the menu (no keymap).
+The first item is preselected, so `<CR>` right after the menu pops up takes
+it. If you want a plain newline while the menu is open, press `<Esc>` first
+(closes the menu), then `<CR>`. With no menu open, `<Esc>` leaves insert mode
+as usual. Entry documentation auto-shows while navigating the menu (no keymap).
 `<C-Space>` is intentionally unmapped (conflicts with macOS / not
 deliverable by Apple Terminal).
 
@@ -122,7 +155,38 @@ Normal mode. Requires an LSP attached to the buffer (`:LspInfo`).
 | `<C-l>`       | Hover docs — same key as completion, by design  |
 | `<leader>c`   | Code actions / quick fixes (also `gra`, a Neovim default) |
 
-Press `K` / `<C-l>` again to focus the hover window and scroll it; `q` closes it.
+**Hover window:** `<C-l>` / `K` opens it. Press the same key again to move the
+cursor *into* it, then scroll with normal motions (`j`/`k`, `<C-d>`/`<C-u>`,
+`gg`/`G`, `/` to search). `q` closes it; while unfocused it also closes when
+you move the cursor.
+
+### Code navigation
+
+Built-in Neovim mappings, active once an LSP attaches (no config needed).
+
+| Mapping   | Action                                                  |
+| --------- | ------------------------------------------------------- |
+| `<C-]>`   | Go to definition (routed through LSP via `tagfunc`)     |
+| `grr`     | Find references                                         |
+| `gri`     | Go to implementation                                    |
+| `grt`     | Go to type definition                                   |
+| `grn`     | Rename symbol                                           |
+| `gO`      | List symbols in the current file                        |
+
+`gd` is **not** LSP go-to-definition here — it's Vim's text-based "go to local
+declaration" and often guesses wrong. Use `<C-]>`.
+
+### Jump history (back / forward)
+
+| Mapping           | Action                                                        |
+| ----------------- | ------------------------------------------------------------- |
+| `<C-o>`           | Back to previous location (like VS Code `Ctrl+-`)             |
+| `<C-i>` / `<Tab>` | Forward again                                                 |
+| `g;` / `g,`       | Previous / next place you *edited* (change list)              |
+
+The jump list records jumps — go-to-definition, searches, `gg`/`G`, switching
+files — and works across files. `:jumps` shows it; `:changes` shows the change
+list.
 
 ## Behavior
 
