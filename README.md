@@ -40,6 +40,7 @@ To add a plugin, create a new file in `lua/plugins/` that returns a lazy.nvim sp
 - **gitsigns.nvim** + **vim-fugitive** — git integration
 - **blink.cmp** — autocompletion
 - **bufferline.nvim** — VS Code-style tab bar for open files
+- **nvim-autopairs** — auto-close brackets and quotes
 
 ## Keymaps
 
@@ -144,6 +145,17 @@ it. If you want a plain newline while the menu is open, press `<Esc>` first
 as usual. Entry documentation auto-shows while navigating the menu (no keymap).
 `<C-Space>` is intentionally unmapped (conflicts with macOS / not
 deliverable by Apple Terminal).
+
+### Auto-pairs (nvim-autopairs)
+
+No keymaps — it works as you type in insert mode:
+
+- `(` `[` `{` `"` `'` `` ` `` insert their closing pair.
+- Typing the closer when it's already right after the cursor steps over it.
+- `<BS>` inside an empty pair deletes both characters.
+- `<CR>` between `{}` splits it onto its own indented line (when the
+  completion menu is closed — otherwise `<CR>` accepts the suggestion).
+- Quotes aren't paired inside strings/comments (treesitter-aware).
 
 ### LSP (documentation & actions)
 
