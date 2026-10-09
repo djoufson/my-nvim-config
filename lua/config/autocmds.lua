@@ -18,12 +18,15 @@ vim.api.nvim_create_autocmd("FileChangedShellPost", {
   end,
 })
 
--- Reload the config when init.lua is saved.
+-- Reload the config when init.lua is saved. Auto-save writes mid-edit, so a
+-- half-typed line gets sourced regularly — failures are swallowed on purpose
+-- and only a successful reload is announced.
 vim.api.nvim_create_autocmd("BufWritePost", {
   group = vim.api.nvim_create_augroup("ReloadConfig", { clear = true }),
   pattern = vim.fn.stdpath("config") .. "/init.lua",
   callback = function()
-    vim.cmd("source <afile>")
-    vim.notify("init.lua reloaded", vim.log.levels.INFO)
+    if pcall(vim.cmd, "source <afile>") then
+      vim.notify("init.lua reloaded", vim.log.levels.INFO)
+    end
   end,
 })

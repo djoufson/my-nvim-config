@@ -26,6 +26,10 @@ map("n", "<leader>hr", function() gs().reset_hunk() end, { desc = "Gitsigns: res
 map("n", "<leader>hp", function() gs().preview_hunk() end, { desc = "Gitsigns: preview hunk", silent = true })
 map("n", "<leader>hb", function() gs().blame_line() end, { desc = "Gitsigns: blame line", silent = true })
 
+-- Auto-save
+map("n", "<leader>as", ":AutoSaveToggle<CR>", { desc = "Auto-save: toggle globally", silent = true })
+map("n", "<leader>ab", ":AutoSaveToggleBuffer<CR>", { desc = "Auto-save: toggle for this buffer", silent = true })
+
 -- LSP: <C-l> as a consistent "show info" key. In insert mode blink.cmp owns
 -- <C-l> (show menu/docs); here in normal mode it shows hover documentation
 -- for the symbol under the cursor — same intent, same key. (Overrides the
